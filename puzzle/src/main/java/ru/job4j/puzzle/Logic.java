@@ -70,8 +70,7 @@ public class Logic {
 
     public boolean isWin() {
         int[][] table = this.convert();
-        boolean result = false;
-        return result;
+        return monoHorizontal(table) || monoVertical(table);
     }
 
     public int[][] convert() {
@@ -90,5 +89,43 @@ public class Logic {
     @Override
     public String toString() {
         return Arrays.toString(this.convert());
+    }
+
+    public static boolean monoHorizontal(int[][] board) {
+        boolean result = true;
+        for (int indexLine = 0; indexLine < board.length; indexLine++) {
+            int count = 0;
+            for (int indexColumn = 0; indexColumn < board[indexLine].length; indexColumn++) {
+                if (board[indexLine][indexColumn] != 1) {
+                    result = false;
+                    break;
+                } else if (board[indexLine][indexColumn] == 1) {
+                    count++;
+                    if (count == board.length) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public static boolean monoVertical(int[][] board) {
+        boolean result = true;
+        for (int indexColumn = 0; indexColumn < board.length; indexColumn++) {
+            int count = 0;
+            for (int indexLine = 0; indexLine < board.length; indexLine++) {
+                if (board[indexLine][indexColumn] != 1) {
+                    result = false;
+                    break;
+                } else if (board[indexLine][indexColumn] == 1) {
+                    count++;
+                    if (count == board.length) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
